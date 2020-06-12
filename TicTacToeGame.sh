@@ -1,11 +1,10 @@
+#!/bin/bash -x
+
 echo ""
 echo "Welcome to Tic Tac Toe game"
 
 winsx=0
 winso=0
-
-while true
-do
 
 declare -a sq
 sq=(1 2 3 4 5 6 7 8 9)
@@ -21,25 +20,13 @@ echo "| ${sq[6]} | ${sq[7]} | ${sq[8]} |"
 echo "-------------"
 echo ""
 
+toss=$((RANDOM%2));
+turn1=0;
+turn2=1;
+if [[ $toss -eq $turn1 ]]
+then
+        echo "1st chance : User"
+else
+        echo "1st chance : Computer"
+fi
 
-  echo "Current score:"
-  echo "  Total games played: $ngames"
-  echo "  x wins: $winsx"
-  echo "  o wins: $winso"
-
-  echo "Another game?[Y/n]"
-  read no
-
-  if [ "$no" = "n" -o "$no" = "N" -o "$no" = "no" -o "$no" = "No" ]; then
-    echo ""
-    echo "Here's hoping you enjoyed TICTACTOE ... the GAME!"
-    echo "Try it again soon!"
-    echo "THANK YOU!!!"
-    exit
-  else
-    echo "****************"
-    echo "*** New Game ***"
-    echo "****************"
-  fi
-done
-#
