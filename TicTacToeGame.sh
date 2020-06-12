@@ -1,5 +1,3 @@
-#!/bin/bash -x
-
 echo ""
 echo "Welcome to Tic Tac Toe game"
 
@@ -21,12 +19,27 @@ echo "-------------"
 echo ""
 
 toss=$((RANDOM%2));
-turn1=0;
-turn2=1;
-if [[ $toss -eq $turn1 ]]
+userTurn=0;
+computerTurn=1;
+
+input1=X;
+input2=O;
+
+if [[ $toss -eq $userTurn ]]
 then
-        echo "1st chance : User"
+        echo "1st turn : User"
+        echo "Choose letter X or O" read -p
+
+        $c= `read -p`
+        if [[ $c -eq $input2 ]]
+        then
+            echo "User has choosen O"
+        elif [[ $c -eq $input1 ]]
+        then
+            echo "User has choosen X"
+        fi
+
 else
-        echo "1st chance : Computer"
+        echo "1st turn : Computer"
 fi
 
