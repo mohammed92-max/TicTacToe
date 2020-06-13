@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-## Initialized variables
+## Initialized variable
 knotcount=3;
 crosscount=4;
 totalcount=5;
@@ -192,6 +192,78 @@ function display()
    done
    echo "\n"
 }
+
+function fixWeights()
+{
+   for (( i=0; i<3; i++ ))
+   do
+      for(( j=0; j<3; j++ ))
+      do
+         if [[ marks[i][j] -eq 1 ]]
+         then
+            if [[ weights[wins[i][j]-1]!=MIN_INT ]]
+            then
+               weights[wins[i][j]-1]=MIN_INT;
+            fi
+         fi
+      done
+   done
+
+   for (( i=0; i<8; i++ ))
+   do
+         if [[ marks[i][totalcount]! -eq 2 ]]
+         then
+            continue;
+         fi
+
+         if [[ marks[i][crosscount] -eq 2 ]]
+         then
+            p=i;
+            q=-1;
+
+
+            if [[ marks[i][0] -eq 0 ]]
+            then
+               q=0;
+            elif [[ marks[i][1] -eq 0 ]]
+            then
+               q=1;
+            elif [[ marks[i][2] -eq 0 ]]
+            then
+               q=2;
+            fi
+
+            if [[ weights[wins[p][q]-1] -ne Integer.min_value ]]
+            then
+               weights[wins[p][q]-1]=6;
+            fi
+         fi
+
+      if [[ marks[i][knotcount] -eq 2 ]]
+      then
+         p=i;
+         q=-1;
+
+         if [[ marks[i][0] -eq 0 ]]
+         then
+            q=0;
+         elif [[ marks[i][1] -eq 0 ]]
+         then
+            q=1;
+         elif [[ marks[i][2] -eq 0 ]]
+         then
+            q=2;
+         fi
+
+         if [[ weights[wins[p][q]-1] -eq Integer.min_value   ]]
+         then
+            weights[wins[p][q]-1]=5;
+         fi
+      fi
+
+   done
+}
+
 
 function checkForWin()
 {
