@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-## Initialized variable
+## Initialized variables
 knotcount=3;
 crosscount=4;
 totalcount=5;
@@ -121,7 +121,7 @@ function put()
             $(display $overridegrid)
          ;;
 
-##       return
+	 ##return
    esac
 
    mark='x';
@@ -164,27 +164,19 @@ function startGame()
       $(put $compMove() 1);
       $status=checkForWin;
    done
-
-      return $status
 }
+
 
 
 function init()
 {
    movesPlayer="";
    override=0;
-   ## marks=new int[8][6];
-   ## wins=new int[][]
-
    wins={{7,8,9},{4,5,6},{1,2,3},{7,4,1},{8,5,2},{9,6,3},{7,5,3},{9,5,1}};
 
    weights={{3,2,3,2,4,2,3,2,3};
    grid=new char[][]{{'','',''},{'','',''},{'','',''}};
-   ##crossbank
-   ##knotbank
 }
-
-
 
 function display()
 {
@@ -200,3 +192,63 @@ function display()
    done
    echo "\n"
 }
+
+function checkForWin()
+{
+   crossFlag=0;
+   knotFlag=0;
+
+   for (( i=0; i<wins.length; i++ ))
+   do
+      if [[ wins[i][0] ]]
+      then
+         if [[ wins[i][1] ]]
+         then
+            if [[ wins[i][2] ]]
+            then
+               $crossFlag=1;
+               break;
+            fi
+         fi
+      fi
+
+      if [[ wins[i][0] ]]
+      then
+         if [[ wins[i][0] ]]
+         then
+            if [[ wins[i][0] ]]
+            then
+                  $knotFlag=1;
+                  break;
+            fi
+         fi
+      fi
+
+   done
+
+   if [[ $knotFlag -eq 1 ]]
+   then
+      $(display $grid)
+      echo "O wins"
+      return $playerid;
+   fi
+
+   if [[ crossFlag -eq 1 ]]
+   then
+      $(display $grid)
+      echo "X wins"
+      return $compid;
+   fi
+
+   for (( i=0; i<weights.length; i++ ))
+   do
+      if [[ weights[i] -ne Integer.min_value ]]
+      then
+         return $playerid;
+      fi
+
+      echo "Truce"
+   done
+}
+
+
