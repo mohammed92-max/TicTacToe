@@ -264,6 +264,36 @@ function fixWeights()
    done
 }
 
+function playerMove()
+{
+   echo "What is your move?"
+   cell=0;
+   okay=0;
+
+   while(( $okay -eq 0 ))
+   do
+      if [[ cell -lt 1 || cell -gt 9 ]] || [[ weights[cell-1] -eq MIN_INT ]]
+      then
+         echo "Invalid move"
+      else
+         okay=1;
+      fi
+   done
+                                                   ## finding cell parameter & passing it to playerMoved()
+   $(playerMoved $cell);
+   echo ""
+   return cell;
+
+}
+
+function playerMoved()
+{
+   local $cell=$1;
+   movesPlayer=$movesPlayer+$cell;
+   $(mark $cell 0);
+   fixWeights
+   $(put $cell 0);
+}
 
 function checkForWin()
 {
