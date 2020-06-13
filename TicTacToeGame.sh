@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-## Initialized variables
+## Initialized variable
 knotcount=3;
 crosscount=4;
 totalcount=5;
@@ -21,7 +21,7 @@ numpad={{'7','8','9'},{'4','5','6'},{'1','2','3'}};
 function startMatch()
 {
    echo "Start,y or n"
-   ###choice='y';
+   ##choice='y';
    ##choice
    ##display(numpad);
    $(display $numpad)
@@ -183,6 +183,7 @@ function init()
    ##crossbank
    ##knotbank
 }
+
 
 
 function display()
